@@ -2,7 +2,7 @@ package main
 
 import "math"
 import "sort"
-
+//O(n log(n) + m log(m))
 func SmallestDifference(array1, array2 []int) []int {
     sort.Ints(array1)
     sort.Ints(array2)
