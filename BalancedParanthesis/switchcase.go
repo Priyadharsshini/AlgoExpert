@@ -1,29 +1,29 @@
 func BalancedBrackets(s string) bool {
-    var arr []string
-	if len(s) == 0 {
+    var stack []byte
+    if len(s) == 0 {
         return false
     }
-    for _, c := range s {
-        val := string(c)
-        switch val {
-        case "{", "(", "[":
-            arr = append(arr, val)
-        case "}":
-            if len(arr) == 0 || arr[len(arr)-1] != "{" {
+    l := len(s)
+    for i := 0; i < l; i++ {
+        switch s[i] {
+        case '{', '(', '[':
+            stack = append(stack, s[i])
+        case '}':
+            if len(stack) == 0 || stack[len(stack)-1] != '{' {
                 return false
             }
-            arr = arr[:len(arr)-1]
-        case ")":
-            if len(arr) == 0 || arr[len(arr)-1] != "(" {
+            stack = stack[:len(stack)-1]
+        case ')':
+            if len(stack) == 0 || stack[len(stack)-1] != '(' {
                 return false
             }
-            arr = arr[:len(arr)-1]
-        case "]":
-            if len(arr) == 0 || arr[len(arr)-1] != "[" {
+            stack = stack[:len(stack)-1]
+        case ']':
+            if len(stack) == 0 || stack[len(stack)-1] != '[' {
                 return false
             }
-            arr = arr[:len(arr)-1]
+            stack = stack[:len(stack)-1]
         }
     }
-    return len(arr) == 0
+    return len(stack) == 0
 }
